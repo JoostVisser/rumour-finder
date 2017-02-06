@@ -22,7 +22,13 @@ class NeuralNetwork(BaseEstimator, ClassifierMixin):
         Example: [80, 20, 30] will have 80 input neurons, 20 neurons in
         the hidden layers and 30 output neurons.
         It's possible to have more than 1 hidden layer, but not recommended.
-
+        'Training data' should be a list of tuples (x, y) representing
+        the inputs and the desired outputs.
+        'Epochs' are the number of times we should go over the training data.
+        'Eta' is the learning rate.
+        'mini_batch_size' is the size of the mini-batch.
+        'lmbda' is lambda, i.e. the regularization parameter
+        'debug' is True will let the neural network print some debug text.
         """
 
         self.num_layers = len(sizes)    # Number of layers
@@ -90,7 +96,7 @@ class NeuralNetwork(BaseEstimator, ClassifierMixin):
                 self.update_mini_batch(X_batch, y_batch, n)
                 
             if self.debug:
-                print(("Epoch " + str(j) + " training complete"))
+                print("Epoch " + str(j) + " training complete")
             
             # Prints out result on the evaluation data if checked.
             if X_cv.any() and y_cv.any():
